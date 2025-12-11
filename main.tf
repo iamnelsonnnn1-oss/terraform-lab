@@ -1,30 +1,7 @@
 # main.tf (Root Configuration File - FINAL & COMPLETE VERSION)
 
 # ----------------------------------------------------------------
-# 1. Terraform Configuration (Providers and Versioning)
-# ----------------------------------------------------------------
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-
-  # >>> REMOTE STATE BACKEND CONFIGURATION <<<
-  # IMPORTANT: This block tells Terraform where to store the state file securely.
-  # Using S3 provides state locking (via DynamoDB) and encryption for team collaboration. 
-  backend "s3" {
-    bucket         = "your-unique-terraform-state-bucket-day5" # MUST be globally unique
-    key            = "terraform-day5/state.tfstate"           # The path/name of the state file in the bucket
-    region         = "us-east-1"
-    encrypt        = true                                     # Encrypts the state file at rest
-    dynamodb_table = "terraform-locks"                        # Table used for state locking (to prevent concurrent changes)
-  }
-}
-
-# ----------------------------------------------------------------
-# 2. Local Values (Common Variables/Tags)
+# 1. Local Values (Common Variables/Tags)
 # ----------------------------------------------------------------
 locals {
   project_name = "day5-app"
@@ -32,7 +9,7 @@ locals {
 }
 
 # ----------------------------------------------------------------
-# 3. Module Calls
+# 2. Module Calls
 # ----------------------------------------------------------------
 
 # Network Module: Creates VPC, Subnets, Internet Gateway, etc.
@@ -55,7 +32,7 @@ module "app_database" {
   private_subnet_ids = module.app_network.private_subnet_ids
   
   # Sensitive/Custom variables
-  db_password        = "P@sswOrd1234"
+  db_password        = "P@sswOrd1234" # <<< REPLACE with your secure password >>>
   db_instance_class  = "db.t3.micro"
 }
 
