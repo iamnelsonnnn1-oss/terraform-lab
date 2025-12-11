@@ -28,12 +28,3 @@ This diagram illustrates the secure top-down connection flow, ensuring the compu
 3.  **AWS VPC / Public Subnets:** Traffic passes through the VPC's public entry point.
 4.  **AWS Lambda (via Security Groups and IAM):** Executes code, authorized by the IAM Role, after passing through the Security Group rules.
 5.  **AWS RDS / AWS S3:** The Lambda connects to these private data resources.
-
----
-## 💻 Final Push Sequence
-
-To finalize the repository and ensure clean history:
-
-1.  Add the new `.gitignore` file and all changes: `git add .`
-2.  Commit the final version: `git commit -m "docs: Final architecture and documentation complete."`
-3.  Push the clean version, overwriting the old corrupted history: `git push --force`
