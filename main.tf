@@ -32,7 +32,7 @@ module "app_database" {
   private_subnet_ids = module.app_network.private_subnet_ids
   
   # Sensitive/Custom variables
-  db_password        = "P@sswOrd1234" # <<< REPLACE with your secure password >>>
+  db_password        = "P@sswOrd1234" 
   db_instance_class  = "db.t3.micro"
 }
 
